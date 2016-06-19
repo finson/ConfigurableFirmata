@@ -21,19 +21,29 @@ void DeviceFirmata::reset() {
   gDeviceTable->reset();
 }
 
-// The pins that are currently being used by device drivers are already
-// marked as PIN_MODE_IGNORE, so we have no additional information to
-// provide to the list of capabilities.
+//---------------------------------------------------------------------------
 
-void DeviceFirmata::handleCapability(byte pin) {}
+// Every pin has the potential to be used by a device driver, so every pin
+// capability request gets the same answer: PIN_MODE_DEVICE.
 
-// Device driver capabilities do not necessarily map directly to Firmata pin
-// modes, and so none of the Firmata modes are recognized and all pin mode
-// requests are disavowed.
+void DeviceFirmata::handleCapability(byte pin) {
+    Firmata.write(PIN_MODE_DEVICE);
+    Firmata.write(1); // 1 = We have to say something; 1 seems like a nice number.
+}
+
+//---------------------------------------------------------------------------
+
+// Putting a pin into PIN_MODE_DEVICE means that you are reserving the
+// pin for some use by one of the device drivers.  The device driver itself
+// will do the actual initializing when it is told to use the particular pin,
+// so there's not much to do here other than acknowledge that we will be
+// responsible for dealing with this mode.
 
 boolean DeviceFirmata::handlePinMode(byte pin, int mode) {
-  return false;
+  return (mode == PIN_MODE_DEVICE);
 }
+
+//---------------------------------------------------------------------------
 
 void DeviceFirmata::update() {
   gDeviceTable->dispatchTimers();
@@ -54,6 +64,21 @@ void DeviceFirmata::update() {
 // as a null-terminated string without having to add the null (eg, open())
 
 boolean DeviceFirmata::handleSysex(byte command, byte argc, byte *argv) {
+
+  // We need to respond to the ANALOG_MAPPING_QUERY in case ANALOG_FIRMATA was
+  // not loaded.  Whichever one answers first will be the final answer, so we
+  // don't need to worry about doubling up.
+
+  if (command == ANALOG_MAPPING_QUERY) {
+    Firmata.write(START_SYSEX);
+    Firmata.write(ANALOG_MAPPING_RESPONSE);
+    for (byte pin = 0; pin < TOTAL_PINS; pin++) {
+      Firmata.write(IS_PIN_ANALOG(pin) ? PIN_TO_ANALOG(pin) : 127);
+    }
+    Firmata.write(END_SYSEX);
+    return true;
+  }
+
   if (command != DEVICE_QUERY) return false;
 
   if (argc < 12) {

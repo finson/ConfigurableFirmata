@@ -117,8 +117,9 @@
 #define PIN_MODE_ENCODER        0x09 // pin configured for rotary encoders
 #define PIN_MODE_SERIAL         0x0A // pin configured for serial communication
 #define PIN_MODE_PULLUP         0x0B // enable internal pull-up resistor for pin
+#define PIN_MODE_DEVICE         0x10 // pin reserved for use by a Luni DeviceDriver
 #define PIN_MODE_IGNORE         0x7F // pin configured to be ignored by digitalWrite and capabilityResponse
-#define TOTAL_PIN_MODES         13
+#define TOTAL_PIN_MODES         14
 // DEPRECATED as of Firmata v2.5
 #define ANALOG                  0x02 // same as PIN_MODE_ANALOG
 #define PWM                     0x03 // same as PIN_MODE_PWM
