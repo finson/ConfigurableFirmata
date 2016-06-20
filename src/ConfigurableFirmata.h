@@ -95,8 +95,8 @@
 
 // DeviceFirmata commands
 
-#define DEVICE_QUERY            0x30 // message requesting action from a device driver (DeviceFirmata)
-#define DEVICE_RESPONSE         0x31 // message providing the device driver response (DeviceFirmata)
+#define DEVICE_QUERY            0x5E // message requesting action from a device driver (DeviceFirmata)
+#define DEVICE_RESPONSE         0x5F // message providing the device driver response (DeviceFirmata)
 
 // these are DEPRECATED to make the naming more consistent
 #define FIRMATA_STRING          0x71 // same as STRING_DATA
