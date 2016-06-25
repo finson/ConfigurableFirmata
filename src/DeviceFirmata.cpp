@@ -166,7 +166,7 @@ boolean DeviceFirmata::handleSysex(byte command, byte argc, byte *argv) {
 //---------------------------------------------------------------------------
 
 void DeviceFirmata::reportClaimPin(int pin) {
-  Firmata.setPinMode((byte)pin, PIN_MODE_IGNORE);
+  Firmata.setPinMode((byte)pin, PIN_MODE_DEVICE);
 }
 
 void DeviceFirmata::reportReleasePin(int pin) {
