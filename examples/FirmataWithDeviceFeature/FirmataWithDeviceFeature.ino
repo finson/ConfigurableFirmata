@@ -180,16 +180,19 @@ I2CFirmata i2c;
 
 // Optional Features
 
-// These optional features are implemented by classes in the library zip files
+// These optional features are implemented by classes in the code files
 // that are located in the Firmata folder 'features-optional'.  In order to
 // enable these features, you have to:
 //   1. uncomment the associated statements below
-//   2. AND you need to install the associated zip files from 'features-optional'.
-//      using the Arduino library manager.
+//   2. AND you need to install the associated files from 'features-optional'
+//      using the Arduino library manager menu item "Include library -> Add .ZIP library".
+//      They are actually in plain folders, not zip files, but just select the folder
+//      for the feature you want and select open.  The feature will be installed
+//      in the sketch library directory.
 
-#include <DeviceFirmata.h>
-#include "SelectedDeviceDrivers.h"
-DeviceFirmata deviceMgr;
+//#include <DeviceFirmata.h>
+//#include "SelectedDeviceDrivers.h"
+//DeviceFirmata deviceMgr;
 
 //#include <OneWireFirmata.h>
 //OneWireFirmata oneWire;
