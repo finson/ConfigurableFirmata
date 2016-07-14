@@ -152,44 +152,68 @@ const byte mac[] = {0x90, 0xA2, 0xDA, 0x0D, 0x07, 0x02};
  * Arduino Uno or Leonardo.
  *============================================================================*/
 
-//#include <DigitalInputFirmata.h>
-//DigitalInputFirmata digitalInput;
+// Core Features
 
-//#include <DigitalOutputFirmata.h>
-//DigitalOutputFirmata digitalOutput;
-
-//#include <AnalogInputFirmata.h>
-//AnalogInputFirmata analogInput;
-
-//#include <AnalogOutputFirmata.h>
-//AnalogOutputFirmata analogOutput;
-
-//#include <Servo.h>
-//#include <ServoFirmata.h>
-//ServoFirmata servo;
-//// ServoFirmata depends on AnalogOutputFirmata
-//#if defined ServoFirmata_h && ! defined AnalogOutputFirmata_h
-//#error AnalogOutputFirmata must be included to use ServoFirmata
-//#endif
-//
-//#include <Wire.h>
-//#include <I2CFirmata.h>
-//I2CFirmata i2c;
-
-//#include <OneWireFirmata.h>
-//OneWireFirmata oneWire;
-
-//#include <StepperFirmata.h>
-//StepperFirmata stepper;
-
-//#include <SerialFirmata.h>
-//SerialFirmata serial;
+// The files defining the core group of features are located in the Firmata
+// source directory. If these include statements are left unedited,
+// the features in the core group will be compiled and included in the
+// executable program.
 
 #include <FirmataExt.h>
 FirmataExt firmataExt;
 
+#include <AnalogInputFirmata.h>
+AnalogInputFirmata analogInput;
+
+#include <AnalogOutputFirmata.h>
+AnalogOutputFirmata analogOutput;
+
+#include <DigitalInputFirmata.h>
+DigitalInputFirmata digitalInput;
+
+#include <DigitalOutputFirmata.h>
+DigitalOutputFirmata digitalOutput;
+
+#include <Wire.h>
+#include <I2CFirmata.h>
+I2CFirmata i2c;
+
+// Optional Features
+
+// These optional features are implemented by classes in the code files
+// that are located in the Firmata folder 'features-optional'.  In order to
+// enable these features, you have to:
+//   1. uncomment the associated statements below
+//   2. AND you need to install the associated files from 'features-optional'
+//      using the Arduino library manager menu item "Include library -> Add .ZIP library".
+//      They are actually in plain folders, not zip files, but just select the folder
+//      for the feature you want and select open.  The feature will be installed
+//      in the sketch library directory.
+
+//#include <DeviceFirmata.h>
+//#include "SelectedDeviceDrivers.h"
+//DeviceFirmata deviceMgr;
+
+//#include <OneWireFirmata.h>
+//OneWireFirmata oneWire;
+
 //#include <FirmataScheduler.h>
 //FirmataScheduler scheduler;
+
+//#include <SerialFirmata.h>
+//SerialFirmata serial;
+
+//#include <Servo.h>
+//#include <ServoFirmata.h>
+//ServoFirmata servo;
+
+// ServoFirmata depends on AnalogOutputFirmata
+#if defined ServoFirmata_h && ! defined AnalogOutputFirmata_h
+#error AnalogOutputFirmata must be included to use ServoFirmata
+#endif
+
+//#include <StepperFirmata.h>
+//StepperFirmata stepper;
 
 // To add Encoder support you must first install the FirmataEncoder and Encoder libraries:
 // https://github.com/firmata/FirmataEncoder
@@ -197,10 +221,6 @@ FirmataExt firmataExt;
 // #include <Encoder.h>
 // #include <FirmataEncoder.h>
 // FirmataEncoder encoder;
-
-#include "SelectedDeviceDrivers.h"
-#include <DeviceFirmata.h>
-DeviceFirmata deviceMgr;
 
 /*===================================================================================
  * END FEATURE CONFIGURATION - you should not need to change anything below this line
