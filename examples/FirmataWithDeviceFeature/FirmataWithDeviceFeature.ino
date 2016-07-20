@@ -24,9 +24,12 @@
 
   Last updated by Jeff Hoefs: January 23rd, 2016
 
-  This ConfigurableFirmataDeviceDriver.ino has been edited to include the
-  DeviceFirmata feature.  None of the other features are installed.
-  Doug Johnson, June 2016
+  This sketch FirmataWithDeviceFeature.ino has been edited to reflect the
+  introduction of the 'features-optional' directory and the proposed addition
+  of the DeviceFirmata / LuniLib feature.  Only the core features are initially
+  enabled.  Instructions on how to enable the optional features are given below.
+
+  Doug Johnson, July 2016
 */
 
 /*
@@ -174,10 +177,6 @@ DigitalInputFirmata digitalInput;
 #include <DigitalOutputFirmata.h>
 DigitalOutputFirmata digitalOutput;
 
-#include <Wire.h>
-#include <I2CFirmata.h>
-I2CFirmata i2c;
-
 // Optional Features
 
 // These optional features are implemented by classes in the code files
@@ -185,14 +184,17 @@ I2CFirmata i2c;
 // enable these features, you have to:
 //   1. uncomment the associated statements below
 //   2. AND you need to install the associated files from 'features-optional'
-//      using the Arduino library manager menu item "Include library -> Add .ZIP library".
-//      They are actually in plain folders, not zip files, but just select the folder
-//      for the feature you want and select open.  The feature will be installed
-//      in the sketch library directory.
+//      using the Arduino menu item "Sketch -> Include library -> Add .ZIP library".
+//      The feature sources are actually in plain folders, not zip files, but just
+//      highlight the folder for the feature you want and select open.  The
+//      feature will be installed in the sketch library directory.
 
 //#include <DeviceFirmata.h>
 //#include "SelectedDeviceDrivers.h"
 //DeviceFirmata deviceMgr;
+
+//#include <I2CFirmata.h>
+//I2CFirmata i2c;
 
 //#include <OneWireFirmata.h>
 //OneWireFirmata oneWire;
